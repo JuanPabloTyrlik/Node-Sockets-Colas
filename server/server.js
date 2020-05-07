@@ -1,3 +1,5 @@
+const TicketControl = require('./sockets/classes/ticket-control').TicketControl;
+
 const express = require('express');
 const socketIO = require('socket.io');
 const http = require('http');
@@ -16,7 +18,7 @@ app.use(express.static(publicPath));
 module.exports.io = socketIO(server);
 require('./sockets/socket');
 
-
+let ticketControl = new TicketControl();
 
 
 
