@@ -1,5 +1,3 @@
-const TicketControl = require('./sockets/classes/ticket-control').TicketControl;
-
 const express = require('express');
 const socketIO = require('socket.io');
 const http = require('http');
@@ -17,10 +15,6 @@ app.use(express.static(publicPath));
 // IO = esta es la comunicacion del backend
 module.exports.io = socketIO(server);
 require('./sockets/socket');
-
-let ticketControl = new TicketControl();
-
-
 
 server.listen(port, (err) => {
 
