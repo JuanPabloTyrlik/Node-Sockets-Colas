@@ -6,12 +6,13 @@ const ticketControl = new TicketControl();
 io.on('connection', (client) => {
     client.on('siguienteTicket', (data, callback) => {
         let siguiente = ticketControl.siguiente();
-        console.log(siguiente);
+        // console.log(siguiente);
         callback(siguiente);
     });
 
     client.emit('estadoActual', {
-        actual: ticketControl.getUltimoTicket()
+        actual: ticketControl.getUltimoTicket(),
+        ultimos: ticketControl.getUltimos4Tickets()
     });
 
     client.on('atenderTicket', (data, callback) => {
@@ -24,5 +25,8 @@ io.on('connection', (client) => {
         let atenderTicket = ticketControl.atenderTicket(data.escritorio);
         callback(atenderTicket);
         // Falta actualizar pantalla de los ultimos tickets
+        client.broadcast.emit('ultimos4', {
+            ultimos: ticketControl.getUltimos4Tickets()
+        })
     });
 });

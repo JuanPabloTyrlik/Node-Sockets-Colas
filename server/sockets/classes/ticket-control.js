@@ -34,6 +34,10 @@ class TicketControl {
         return `Ticket ${this.ultimo}`;
     }
 
+    getUltimos4Tickets() {
+        return this.ultimosTickets;
+    }
+
     atenderTicket(escritorio) {
         if (this.tickets.length === 0)
             return 'No hay más tickets';
@@ -44,9 +48,9 @@ class TicketControl {
         this.ultimosTickets.unshift(atenderTicket);
 
         if (this.ultimosTickets.length > 4) {
-            this.ultimosTickets.slice(-1, 1);
+            this.ultimosTickets.splice(-1,1);
         }
-        console.log(this.ultimosTickets);
+        // console.log(this.ultimosTickets);
         this.grabarArchivo();
         return atenderTicket;
     }
